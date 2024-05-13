@@ -1,3 +1,4 @@
+############################################### Exercício 1: Calculadora de descontos na compra por atacado. ###############################################
 print("***** Bem vindo(a) à Super Atacadão *****")
 print("Disponibilizamos descontos para compras em atacado! Vamos calcular o seu?") # Contextualização.
 
@@ -23,3 +24,475 @@ desconto = valor_total - valor_com_desconto
 print(f'O valor da compra sem desconto fica: R${valor_total}') # Apresentação do valor sem desconto
 print(f'O valor da compra com desconto fica: R${valor_com_desconto}') # Apresentação do valor sem desconto
 print(f'O valor total do desconto foi: R${desconto} ({percentual}% de desconto)')
+
+
+
+
+
+############################################### Exercício 2: Calculadora do total de pedidos em sorveteria. ###############################################
+print("---------------------------- Bem vindo(a) à sorveteria ----------------------------") 
+print("-----------------------------------------------------------------------------------") 
+print("-------------------------------------Cardápio--------------------------------------")
+print('----------------------| Tamanho | Cupuaçu (CP) | Açaí (AC) |-----------------------')
+print("----------------------|    P    |     R$10     |    R$12   |-----------------------") 
+print("----------------------|    M    |     R$15     |    R$17   |-----------------------")
+print("----------------------|    G    |     R$19     |    R$21   |-----------------------")
+print("-----------------------------------------------------------------------------------")
+
+pedido_completo = 0 # Variável auxiliar ao loop
+
+valor_total = 0 # Variável acumuladora
+
+while pedido_completo != "N":
+    
+    tamanho = input("Qual tamanho deseja? ").upper()            # Input do tamanho do copo
+    if tamanho != 'P' and tamanho != 'M' and tamanho != 'G':
+        print("Tamanho inválido! Escolha novamente")            # Controle de input para o tamanho do copo
+        continue
+    
+    sorvete = input("Cupuaçu (CP) ou Açaí (AC)? ").upper()    # Input do sabor do sorvete
+    if sorvete != 'CP' and sorvete != 'AC':
+        print("Sabor inválido! Escolha novamente")            # Controle de input para o sabor do sorvete
+        continue
+    
+    if sorvete == 'CP'and tamanho == 'P':      # Loop de verificação do tamanho e sabor para determinar o valor de cada item
+        valor = 10
+    elif sorvete == 'CP'and tamanho == 'M':
+        valor = 15
+    elif sorvete == 'CP'and tamanho == 'G':
+        valor = 19
+    elif sorvete == 'AC'and tamanho == 'P':
+        valor = 12
+    elif sorvete == 'AC'and tamanho == 'M':
+        valor = 17
+    else:
+        valor = 21
+    valor_total += valor      # Variável acumuladora recebendo os valores 
+    
+    pedido_completo = input("Deseja pedir mais alguma coisa? (S ou N) ").upper()   # Loop de adição de novo copo e encerramento do pedido
+
+print(f"Seu total é: R${valor_total}!")       # Mostrando o valor final do pedido
+
+
+
+
+
+############################################### Exercício 3: Sistema de cobrança de serviços de uma copiadora. ############################################### 
+def escolha_servico():                               #Função criada para o usuário escolher um serviço e para a main receber o valor de serviço por página. 
+
+    print("DIG - Serviço de Digitalização")            #Criação do menu de escolha dos serviços.  
+
+    print("ICO - Serviço de Impressão Colorida") 
+
+    print("IBO - Serviço de Impressão Preto e Branco") 
+
+    print("FOT - Serviço de Fotocópia") 
+
+     
+
+     
+
+    global servico                                     #Tornando a variável 'servico' em variável global para uso na main().   
+
+    while True:                                           #Criando um loop infinito para o input do serviço pelo usuário. 
+
+         
+
+        servico = input("Qual serviço deseja? ").upper()     #O input pode ser feito em minúsculo que automaticamente vai ser transformado em maiúsculo. 
+
+        if servico == "DIG":                            #Comparação do input com os valores de referência do menu de serviços 
+
+            servico = 1.1                                 #Inserção do valor do serviço por página 
+
+            print(f'Você escolheu o Serviço de Digitalização! O custo por página é R${servico}') #Print do serviço + valor unitário.  
+
+            break                                       #Quebra do loop infinito  
+
+  
+
+        elif servico == "ICO":                            #Comparação do input com os valores de referência do menu de serviços 
+
+            servico = 1                                  #Inserção do valor do serviço por página 
+
+            print(f'Você escolheu o Serviço de Impressão Colorida! O custo por página é R${servico}') #Print do serviço + valor unitário. 
+
+            break                                       #Quebra do loop infinito  
+
+         
+
+        elif servico == "IBO":                            #Comparação do input com os valores de referência do menu de serviços 
+
+            servico = 0.4                                 #Inserção do valor do serviço por página 
+
+            print(f'Você escolheu o Serviço de Impressão Preto e Branco! O custo por página é R${servico}') #Print do serviço + valor unitário. 
+
+            break                                       #Quebra do loop infinito  
+
+         
+
+        elif servico == "FOT":                            #Comparação do input com os valores de referência do menu de serviços 
+
+            servico = 0.2                               #Inserção do valor do serviço por página 
+
+            print(f'Você escolheu o Serviço de Fotocópia! O custo por página é R${servico}') #Print do serviço + valor unitário. 
+
+            break                                       #Quebra do loop infinito  
+
+         
+
+        else: 
+
+            print("Escolha novamente.") #Mensagem de erro caso o input seja diferente das opções apresentadas no menu de escolha dos serviços. 
+
+            continue                                       #Como não foi escolhida uma opção válida, o loop reinicia. 
+
+     
+
+    return servico            #Retorno do valor de cada serviço untário dentre os disponíveis no menu de serviços. 
+
+             
+
+def num_pagina():            #Função para determinar o número de páginas pelas quais o usuário pagará já considerando o desconto. 
+
+    global num_pagina      
+
+    global desconto          #Tornando 'num_pagina','desconto' e 'paginas' variáveis globais para serem usadas na main 
+
+    global paginas 
+
+    while True:                 #Criando um loop infinito 
+
+        try:                    #Criando um loop para mostrar mensagem de erro caso insiram strings 
+
+            paginas = int(input("Quantas páginas? "))        #Caixa de input já transformando o input em int pra comparar com os valores de referência 
+
+         
+
+            if paginas < 20:                   #Loop para determinar por quantas páginas o cliente pagará 
+
+                desconto = 0                   #Armazenando o valor do desconto 
+
+                num_pagina = paginas           #Nesse caso, nenhum desconto foi aplicado. 
+
+                break 
+
+                 
+
+            elif paginas >= 20 and paginas < 200:     
+
+                desconto = 15                   #Armazenando o valor do desconto 
+
+                num_pagina = 0.85*paginas         #Para o desconto de 15%, aplicado aos pedidos entre 20 e 199 páginas, foi criada uma variável para armazenar 85% do número de páginas do pedido original. Assim, quando 'num_pagina' for multiplicado na main() pelo valor unitário, já sairá com desconto! 
+
+                break 
+
+                 
+
+            elif paginas >= 200 and paginas < 2000: 
+
+                desconto = 20                   #Armazenando o valor do desconto 
+
+                num_pagina = 0.8*paginas         #Para o desconto de 20%, aplicado aos pedidos entre 200 e 1999 páginas, foi criada uma variável para armazenar 80% do número de páginas do pedido original. Assim, quando'num_pagina' for multiplicado na main() pelo valor unitário, já sairá com desconto! 
+
+                break 
+
+                 
+
+            elif paginas >= 2000 and paginas < 20000: 
+
+                desconto = 25                   #Armazenando o valor do desconto 
+
+                num_pagina = 0.75*paginas      #Para o desconto de 20%, aplicado aos pedidos entre 2000 e 19999 páginas, foi criada uma variável para armazenar 75% do número de páginas do pedido original. Assim, quando'num_pagina' for multiplicado na main() pelo valor unitário, já sairá com desconto! 
+
+                break 
+
+                 
+
+            else: 
+
+                print("Não aceitamos pedidos com tantas páginas!") #Não são aceitos pedidos maiores ou iguais a 20.000. 
+
+                 
+
+        except ValueError: 
+
+            print("Insira o número de páginas, por favor.")      #No caso da inserção de string, será exibida uma mensagem pedindo um número. 
+
+  
+
+    print(f"Você recebeu {desconto}% de desconto no seu serviço de {paginas} páginas!")   #Print do valor de desconto sobre o número de páginas a que o pedido se refere. 
+
+      
+
+     
+
+    return num_pagina             #Retorno do número de páginas pelas quais o cliente pagará. 
+
+     
+
+def servico_extra():                          #Função para inserção de serviços extra, caso o cliente queira algum. 
+
+    print("Serviços Extra: ")                   
+
+    print("0 - Sem Serviço Extra. ") 
+
+    print("1 - Encadernação Simples.")          #Menu de serviços extra. 
+
+    print("2 - Encadernação de Capa Dura. ") 
+
+     
+
+    produto_extra = int(input("Deseja inserir algum serviço extra? "))      #Input de serviços extras 
+
+     
+
+    global extra             #Tornando a variável 'extra' global 
+
+     
+
+    while True:                        #Criando um loop infinito 
+
+        if produto_extra == 0:          #Comparando o input com as opções do menu de serviços extra 
+
+            print("Ok, sem extras!")    #Mensagem de confirmação de não adição de serviços extra 
+
+            extra = 0                   #Armazenado o valor 0 para itens extra calculados na main() 
+
+            break                       #Quebra do loop 
+
+        elif produto_extra == 1:        #Comparando o input com as opções do menu de serviços extra 
+
+            print("Encadernação Simples, então!")       #Mensagem de confirmação de adição do serviço de encadernação simples 
+
+            extra = 15                                  #Armazenando o valor 15 para itens extra calculados na main() 
+
+            break                                       #Quebra do loop 
+
+        elif produto_extra == 2:        #Comparando o input com as opções do menu de serviços extra 
+
+            print("Encadernação de Capa Dura, pra já!")       #Mensagem de confirmação de adição do serviço de encadernação de capa dura 
+
+            extra = 40                                        #Armazenando o valor 40 para itens extra calculados na main() 
+
+            break                                             #Quebra do loop 
+
+        else:  
+
+            print("Essa não é uma das nossas opções. Tente novamente!")    #Mensagem de erro pela não compatibilidade do input de serviço extra e retorno ao inicio do loop. 
+
+    return extra         #Retorno do valor de itens extra a serem utilizados na main() 
+
+             
+
+def main(): 
+
+    print("Bem vindo(a) à papelaria!")  
+
+    escolha_servico()     #Aplicação da UDF de escolha do serviço 
+
+    num_pagina()          #Aplicação da UDF de cálculo do desconto sobre o número de páginas  
+
+    servico_extra()       #Aplicação da UDF de armazenamento de valor adicional por serviço extra 
+
+     
+
+    total = servico * num_pagina + extra #Armazenamento do total do valor do serviço por pagina multiplicado pelo número de páginas pelas quais o cliente pagará, somado ao valor adicional no caso de solicitação de serviço extra. 
+
+     
+
+    total = "{:.2f}".format(total) #Formatação do valor total em float de 2 casas decimais 
+
+     
+
+    print(f"O seu total é: R${total}! (([valor do serviço: R${servico}] * [número de páginas: {paginas}] - [desconto de {desconto}%]) + [serviço extra R${extra}])") #Print da explicação do total a pagar. 
+
+
+
+
+
+############################################### Exercício 4: Software de cadastro e consulta de livros para biblioteca. ###############################################
+def cadastrar_livro(index):                         #função de cadastro de livro com índice automático 
+
+    escolha_nome = input("Qual livro gostaria de inserir? ")         #inserção do nome do livro 
+
+    escolha_autor = input("E ele é de que autor? ")         #inserção do autor do livro 
+
+    escolha_editora = input("E qual a editora?")         #inserção da editora do livro 
+
+    livro = {'id': index, 'nome': escolha_nome, 'autor': escolha_autor, 'editora': escolha_editora} #construção do dicionário 
+
+    lista_livro.append(livro)            #inserção das informações do dicionário do livro na lista de livros 
+
+    return lista_livro 
+
+    print("Livro cadastrado!")       #mensagem de sucesso da operação 
+
+     
+
+def consultar_livro():                #função de consulta de livros 
+
+    while True:                       #loop infinito 
+
+        print("Consulta de livros: ")  #menu de consulta de livros 
+
+        print("1- Consultar todos") 
+
+        print("2- Consultar por id") 
+
+        print("3- Consultar por autor") 
+
+        print("4- Retornar ao menu") 
+
+        print(67*'-') 
+
+  
+
+        opcao = int(input("Escolha uma das opções (1, 2, 3 ou 4): "))  #input da escolha de operação 
+
+         
+
+        if opcao == 1: 
+
+            print(lista_livro) 
+
+            print(67*'-')            #impressão de todos os livros cadastrado 
+
+             
+
+        elif opcao == 2: 
+
+            indice = int(input("Qual seria o id? "))            #seleção do id do livro a ser retornado 
+
+            for dicionario in lista_livro: 
+
+                if dicionario["id"] == indice:                  #comparação dos ids dos livros da lista com o id desejado 
+
+                    print(dicionario)                           #impressão do livro referente ao id escolhido 
+
+             
+
+        elif opcao ==3:                    
+
+            escolha_autor = input("Qual o nome do autor? ")     #seleção do nome do outor referente ao livro a ser retornado 
+
+            for dicionario in lista_livro: 
+
+                if dicionario["autor"] == escolha_autor:        #comparação dos nomes dos livros da lista com o nome do autor desejado 
+
+                    print(dicionario)                           #impressão dos livros referente ao autor escolhido 
+
+         
+
+        elif opcao == 4:           
+
+            break                #quebra do loop, ao selecionar "retornar ao menu" 
+
+        else: 
+
+            print("Opção inválida. Insira um valor válido (1, 2, 3 ou 4)! ")      # no caso de um input inválido, a mensagem de erro será impressa 
+
+            print(67*'-') 
+
+         
+
+         
+
+def remover_livro():                             #função de remoção de livro da lista de livros 
+
+    indice = int(input("Qual seria o id? "))     #seleção do id do livro a remover 
+
+    for dicionario in lista_livro: 
+
+        if dicionario["id"] == indice:           #comparação do input com os ids dos livros da lista de livros 
+
+            lista_livro.remove(dicionario)       #remoção do livro 
+
+            print("Livro deletado com sucesso!") #mensagem de sucesso da operação 
+
+            print(lista_livro)                   #impressão da lista de livros atualizada 
+
+        else: 
+
+            print("Livro não encontrado!")       #caso o id inputado não esteja na lista, a mensagem de erro será impressa 
+
+  
+
+def main(): 
+
+    global lista_livro        
+
+    lista_livro = []            #criando a lista de livros como variável global vazia 
+
+    global id_global            #criando o id dos livros setado no 0 
+
+    id_global = 0 
+
+    opcao = 0                   #variável de controle do loop infinito do menu principal 
+
+     
+
+    while opcao !=4:            #se o input da seleção da operação for igual a 4, o loop será interrompido 
+
+        try: 
+
+            print("Bem vindo(a) à livraria da Ana Clara Martins Damasceno / RU 4771859") # Introdução com nome e RU!  
+
+            print(67*'-') 
+
+            print('1 - Cadastrar Livro') 
+
+            print('2 - Consultar Livro') 
+
+            print('3 - Deletar Livro') 
+
+            print('4 - Encerrar Programa') 
+
+  
+
+            opcao = int(input('Qual das opções acima te atendem? (1, 2, 3 ou 4) ')) 
+
+            print(67*'-') 
+
+            if opcao == 1: 
+
+                cadastrar_livro(id_global)     #caso a opção 1 seja a escolhida, a função cadastrar_livro será chamada, criando um id automático 
+
+                id_global +=1                  #no próximo cadastro, o id será um número sucessor 
+
+                continue 
+
+                     
+
+            elif opcao ==2: 
+
+                consultar_livro()              #caso a opção 2 seja a escolhida, a função de consulta de livros será chamada 
+
+                continue 
+
+                 
+
+            elif opcao ==3: 
+
+                remover_livro()                #caso a opção 3 seja a escolhida, a função de remoção de livros será chamada 
+
+                continue 
+
+                 
+
+            elif opcao >=5:                    #caso um número maior ou igual a 5 seja inputado, a mensagem de opção invalida será impressa 
+
+                print("Insira uma opção válida (1, 2, 3 ou 4)!") 
+
+                continue 
+
+             
+
+        except ValueError: 
+
+            print("Opção inválida! ")          #caso seja inputado um caracter não numérico, uma mensagem de opção inválida será impressa 
+
+            print(67*'-') 
+
+            continue 
+
+      
