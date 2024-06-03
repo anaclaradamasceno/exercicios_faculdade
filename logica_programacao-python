@@ -435,7 +435,7 @@ def main():
 
         try: 
 
-            print("Bem vindo(a) à livraria da Ana Clara Martins Damasceno / RU 4771859") # Introdução com nome e RU!  
+            print("Bem vindo(a) à livraria") 
 
             print(67*'-') 
 
